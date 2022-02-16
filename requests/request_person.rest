@@ -1,11 +1,11 @@
-DELETE http://localhost:3001/api/delete/5
+DELETE http://localhost:3001/api/persons/620d1df847a4bfefa31bccae
 
 
 ###
-POST http://localhost:3001/api/addPersons 
+POST http://localhost:3001/api/persons 
 content-type: application/json
 
 {
-"name": "qwer",
-"number": "3125673443"
+"name": "Mauricio",
+"number": "3125673143"
 }
