@@ -1,3 +1,16 @@
+// Organizado por modulos
+
+const app = require("./app");
+const http = require("http");
+const config = require("./utils/config");
+const logger = require("./utils/logger");
+
+const server = http.createServer(app);
+
+server.listen(config.PORT, () => {
+  logger.info(`server running on port ${config.PORT}`);
+});
+
 /* 
 SOLO NODE 
 
@@ -35,11 +48,11 @@ const PORT = 3001;
 app.listen(PORT); */
 
 /* CON NODE-EXPRESS-NODEMON */
-require("dotenv").config();
+/* require("dotenv").config();
 const express = require("express");
-const bodyParser = require("body-parser");
+const bodyParser = require("body-parser"); */
 /* const morgan = require("morgan");*/
-const cors = require("cors");
+/* const cors = require("cors");
 const phoneBook = require("./models/phoneBook");
 const { request, response } = require("express");
 const app = express();
@@ -51,11 +64,11 @@ const logger = (request, response, next) => {
   console.log("Body:  ", request.body);
   console.log("---");
   next();
-};
+}; */
 
-app.use(express.static("build"));
+/* app.use(express.static("build"));
 app.use(bodyParser.json());
-app.use(logger);
+app.use(logger); */
 /* morgan.token("content", (req, res) => {
   return JSON.stringify(req.body);
 });
@@ -85,18 +98,18 @@ app.use(morgan(":method :url :status :response-time ms :content")); */
 ]; */
 
 /* see all people in with json format */
-app.get("/api/persons", (request, response) => {
+/* app.get("/api/persons", (request, response) => {
   phoneBook.find({}).then((phonebooks) => {
     response.json(phonebooks.map((phoneBook) => phoneBook.toJSON()));
   });
-  /* response.json(persons); */
-});
+  response.json(persons);
+}); */
 
 /* see unique person  */
-app.get("/api/persons/:id", (request, response) => {
+/* app.get("/api/persons/:id", (request, response) => {
   const id = request.params.id;
 
-  /* const person = persons.find((person) => person.id === id); */
+  const person = persons.find((person) => person.id === id);
   phoneBook
     .findById(id)
     .then((phonebook) => {
@@ -109,23 +122,22 @@ app.get("/api/persons/:id", (request, response) => {
     .catch((error) => {
       next(error);
     });
-  /*  if (person) {
+   if (person) {
     response.json(person);
   } else {
     response.status(404).end();
-  } */
-});
+  }
+}); */
 
 /*enter new people*/
-app.post("/api/persons", (request, response) => {
+/* app.post("/api/persons", (request, response) => {
   const body = request.body;
-  /* const repeatName = persons.find((person) => person.name === body.name); */
-
-  /*  if (!body.name || !body.number) {
+  const repeatName = persons.find((person) => person.name === body.name); 
+  if (!body.name || !body.number) {
     return response.status(400).json({
       error: "Content missing",
     });
-  } */
+  } 
 
   const person = new phoneBook({
     name: body.name,
@@ -142,10 +154,10 @@ app.post("/api/persons", (request, response) => {
         error: error.message,
       })
     );
-  /* person.save().then((savedNote) => {
+  person.save().then((savedNote) => {
     response.json(savedNote);
-  }); */
-});
+  });
+}); */
 
 /* initial api information*/
 /* app.get("/", (request, response) => {
@@ -162,7 +174,7 @@ app.post("/api/persons", (request, response) => {
 }); */
 
 /* Delete unique person */
-app.delete("/api/persons/:id", (request, response, next) => {
+/* app.delete("/api/persons/:id", (request, response, next) => {
   const id = request.params.id;
   phoneBook
     .findByIdAndRemove(id)
@@ -173,11 +185,11 @@ app.delete("/api/persons/:id", (request, response, next) => {
       next(error);
     });
 
-  /*  persons = persons.filter((person) => person.id !== id);
-  response.status(204).end(); */
-});
+   persons = persons.filter((person) => person.id !== id);
+  response.status(204).end();
+}); */
 
-app.put("api/persons/:id", (request, response, next) => {
+/* app.put("api/persons/:id", (request, response, next) => {
   const body = request.body;
   const id = request.params.id;
 
@@ -215,4 +227,4 @@ app.use(errorHandler);
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-});
+}); */
